@@ -12,6 +12,7 @@ class TasksController < ApplicationController
       flash.notice = "Task was created successfully!"
       redirect_to root_path
     else
+      flash.notice = "Your task could not be created"
       render :new
     end
   end
