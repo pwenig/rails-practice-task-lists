@@ -2,14 +2,19 @@
 
   <section class="task-list">
     <h1><%= task_list.name %></h1>
+    <% if current_user %>
+      <%= link_to '+ Add Task', new_task_list_task_path(task_list) %>
+    <% end %>
+
     <% task_list.tasks.each do |task| %>
       <dd>
+        <br>
+      <% if task.completed? == false %>
       <%= task.name %> (<%= distance_of_time_in_words(Time.now, task.due_date + 1.day) %>)
+      <%= link_to 'Complete Task', task_list_task_path(task.task_list_id, task), method: :put %>
       <% end %>
+        <% end %>
     </dd>
-    <% if current_user %>
-    <%= link_to '+ Add Task', new_task_list_task_path(task_list) %>
-    <% end %>
   </section>
 
 <% end %>
