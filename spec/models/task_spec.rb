@@ -8,6 +8,6 @@ describe Task do
 
     task = Task.new(name: "")
     expect(task).to have(1).errors_on(:name)
-
   end
+
 end
