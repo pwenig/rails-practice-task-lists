@@ -1,7 +1,11 @@
-    <% if tasks.completed? == false %>
+<% if tasks.user_id == session[:user_id] %>
+
+<% if tasks.completed? == false %>
       <%= tasks.name %> (<%= distance_of_time_in_words(Time.now, tasks.due_date + 1.day) %>)
       <%= link_to 'Complete Task', task_list_task_path(tasks.task_list_id, tasks), method: :put %>
       <br>
       <br>
+
+    <% end %>
     <% end %>
 
