@@ -92,4 +92,11 @@ feature 'Task lists' do
     expect(page).to have_content "Nothing here to see!"
   end
 
+  scenario 'Non-logged in user cannot visit new task path' do
+   task_list =  TaskList.create!(name: "Work List")
+    visit new_task_list_task_path(task_list)
+    expect(page).to have_content "Email"
+    expect(page).to have_content "Password"
+
+  end
 end
