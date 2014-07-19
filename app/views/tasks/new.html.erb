@@ -1,5 +1,8 @@
 <h2>Add a task</h2>
 
+<% if flash[:notice] %>
+  <%= flash[:notice] %>
+<% end %>
 
 <%= form_for [@task_list, @task] do |t| %>
   <%= t.label "Description" %>
