@@ -15,6 +15,7 @@ feature 'Task lists' do
     click_on "Login"
     expect(page).to have_content("Work List")
     expect(page).to have_content("Household Chores")
+    expect(page).to have_content("Nothing here to see!")
   end
 
   scenario 'User can add tasks to a task list' do
