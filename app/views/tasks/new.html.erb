@@ -1,0 +1,16 @@
+<h2>Add a task</h2>
+
+
+<%= form_for [@task_list, @task] do |t| %>
+  <%= t.label "Description" %>
+  <br>
+  <%= t.text_field :description %>
+  <br>
+  <br>
+  <%= t.label "Due date" %>
+  <br>
+  <%= t.date_select(:due_date, :order=>[:year, :month, :day], :use_two_digit_numbers => true) %>
+  <br>
+  <br>
+  <%= t.submit "Create Task" %>
+<% end %>
