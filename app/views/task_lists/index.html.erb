@@ -8,22 +8,14 @@
 
   <section class="task-list">
     <h1><%= task_list.name %></h1>
-    <%= link_to '+ Add Task', new_task_list_task_path(task_list) %>
-    <br>
-    <% if task_list.tasks.empty? %>
-      <p>Nothing here to see!</p>
-    <% else %>
-      <% task_list.tasks.sort_by { |task| task.due_date }.each do |task| %>
-        <% if task.user_id == session[:user_id] %>
-        <% if task.completed.nil? %>
-          <%= task.description %>
-          (<%= distance_of_time_in_words(Time.now, task.due_date + 1.day) %>)
-          <%= link_to 'Complete task', task_list_task_path(task.task_list_id, task), :method => :put %>
-          <br>
-        <% end %>
+    <% if current_user %>
+      <%= link_to '+ Add Task', new_task_list_task_path(task_list) %>
+      <br>
+      <% if task_list.tasks.empty? %>
+        <p>Nothing here to see!</p>
+      <% else %>
+        <%= render partial: 'tasks/tasks', collection: task_list.tasks.sort_by { |task| task.due_date } %>
       <% end %>
+      </section>
     <% end %>
-    <% end %>
-  </section>
-
 <% end %>
