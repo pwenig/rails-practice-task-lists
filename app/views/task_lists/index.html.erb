@@ -11,7 +11,7 @@
     <h1><%= task_list.name %></h1>
     <%= link_to '+ Add Task', new_task_list_task_path(task_list) %>
 <br>
-<% task_list.tasks.each do |task| %>
+<% task_list.tasks.sort_by{ |task| task.due_date }.each do |task| %>
       <% if task.completed.nil? %>
     <%= task.description %>
       (<%= distance_of_time_in_words(Time.now, task.due_date + 1.day) %>)
