@@ -4,6 +4,7 @@
 
 <% @task_lists.each do |task_list| %>
 
+
   <section class="task-list">
     <h1><%= task_list.name %></h1>
     <% if current_user %>
@@ -11,7 +12,11 @@
       <% end %>
     <br>
     <br>
+    <% if task_list.tasks.empty? == true %>
+      <p>Nothing here to see!</p>
+    <% else %>
     <%= render partial: 'tasks/tasks', collection: task_list.tasks.sort_by { |task| task.due_date } %>
   </section>
 
+<% end %>
 <% end %>

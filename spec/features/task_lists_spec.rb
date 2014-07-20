@@ -77,4 +77,17 @@ feature 'Task lists' do
     click_on "Complete Task"
     expect(page).to_not have_content "A fun task"
   end
+
+  scenario 'User sees a message when there are no tasks' do
+    create_user email: "user@example.com"
+    TaskList.create!(name: "Work List")
+    TaskList.create!(name: "Household Chores")
+
+    visit signin_path
+    click_on "Login"
+    fill_in "Email", with: "user@example.com"
+    fill_in "Password", with: "password"
+    click_on "Login"
+    expect(page).to have_content "Nothing here to see!"
+  end
 end
