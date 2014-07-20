@@ -11,7 +11,7 @@
       <% end %>
     <br>
     <br>
-    <%= render partial: 'tasks/tasks', collection: task_list.tasks %>
+    <%= render partial: 'tasks/tasks', collection: task_list.tasks.sort_by { |task| task.due_date } %>
   </section>
 
 <% end %>
