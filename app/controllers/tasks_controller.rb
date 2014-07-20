@@ -6,12 +6,13 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task_list_id = TaskList.find(params[:task_list_id])
+    @task_list = TaskList.find(params[:task_list_id])
     @task = Task.new(task_attributes)
     if @task.save
       flash.notice = "Task was created successfully!"
       redirect_to root_path
     else
+      flash.notice = "Your task could not be created"
       render :new
     end
   end
