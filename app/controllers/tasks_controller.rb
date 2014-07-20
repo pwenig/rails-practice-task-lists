@@ -16,6 +16,13 @@ class TasksController < ApplicationController
     end
   end
 
+  def update
+    task = Task.find(params[:id])
+    task.update(completed: true)
+    redirect_to root_path
+  end
+
+
   private
   def task_attributes
     params.require(:task).permit(:description, :due_date).merge(task_list_id: params[:task_list_id])
