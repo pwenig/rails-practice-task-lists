@@ -1,7 +1,17 @@
+<% if flash[:notice] %>
+  <%= flash[:notice] %>
+<% end %>
+
 <% @task_lists.each do |task_list| %>
 
   <section class="task-list">
     <h1><%= task_list.name %></h1>
+    <% if current_user %>
+    <%= link_to '+ New Task', new_task_list_task_path(task_list) %>
+      <% end %>
+    <br>
+    <br>
+    <%= render partial: 'tasks/tasks', collection: task_list.tasks %>
   </section>
 
 <% end %>
