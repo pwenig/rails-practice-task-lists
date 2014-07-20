@@ -1,12 +1,15 @@
+<% if @task.errors.any? %>
+  <%= @task.errors.full_messages %>
+  <% end %>
+
+
 <h2>Add a task</h2>
-<% if flash[:notice] %>
-  <%= flash[:notice] %>
-<% end %>
+
 
 
 <%= form_for [@task_list, @task] do |t| %>
   <%= t.label 'description' %>
   <%= t.text_field 'description' %>
-  <%= t.date_select( :due_date, :order =>[:year, :month, :day], :use_two_digit_numbers => true)%>
+  <%= t.date_select(:due_date, :order => [:year, :month, :day], :use_two_digit_numbers => true) %>
   <%= t.submit 'Create Task' %>
 <% end %>
