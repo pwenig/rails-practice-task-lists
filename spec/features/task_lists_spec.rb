@@ -90,4 +90,32 @@ feature 'Task lists' do
     click_on "Login"
     expect(page).to have_content "Nothing here to see!"
   end
+
+  scenario 'User can only see their own tasks' do
+    create_user name: "user1", email: "user1@example.com", password: "password1", password_confirmation: "password1"
+    create_user name: "user2", email: "user2@example.com", password: "password2", password_confirmation: "password2"
+    TaskList.create!(name: "Work List")
+    TaskList.create!(name: "Household Chores")
+
+    visit signin_path
+    click_on "Login"
+    fill_in "Email", with: "user1@example.com"
+    fill_in "Password", with: "password1"
+    click_on "Login"
+    first(:link, "+ New Task").click
+    fill_in "task[description]", with: "A fun task"
+    select "2015", from: "task[due_date(1i)]"
+    select "06", from: "task[due_date(2i)]"
+    select "06", from: "task[due_date(3i)]"
+    click_on "Create Task"
+    click_on "Logout"
+
+    visit signin_path
+    click_on "Login"
+    fill_in "Email", with: "user2@example.com"
+    fill_in "Password", with: "password2"
+    click_on "Login"
+
+    expect(page).to_not have_content "A fun task"
+  end
 end
