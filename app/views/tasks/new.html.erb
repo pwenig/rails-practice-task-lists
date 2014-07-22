@@ -1,17 +1,18 @@
-<% if @task.errors.any? %>
-  <%= @task.errors.full_messages %>
+<% if @task.errors.each do |attribute, message| %>
+  <%= message %>
+<% end %>
+
+
+  <h2>Add a task</h2>
+
+
+
+  <%= form_for [@task_list, @task] do |t| %>
+    <%= t.label 'description' %>
+    <%= t.text_field 'description' %>
+    <br>
+    <%= t.date_select(:due_date, :order => [:year, :month, :day], :use_two_digit_numbers => true) %>
+    <br>
+    <%= t.submit 'Create Task' %>
   <% end %>
-
-
-<h2>Add a task</h2>
-
-
-
-<%= form_for [@task_list, @task] do |t| %>
-  <%= t.label 'description' %>
-  <%= t.text_field 'description' %>
-  <br>
-  <%= t.date_select(:due_date, :order => [:year, :month, :day], :use_two_digit_numbers => true) %>
-  <br>
-  <%= t.submit 'Create Task' %>
 <% end %>
