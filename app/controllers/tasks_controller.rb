@@ -1,8 +1,13 @@
 class TasksController < ApplicationController
 
   def new
+    if current_user
     @task_list = TaskList.find(params[:task_list_id])
     @task = Task.new
+    else
+      redirect_to signin_path
+    end
+    
   end
 
   def create
