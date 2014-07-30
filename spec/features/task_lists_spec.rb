@@ -36,7 +36,7 @@ feature 'Task lists' do
     click_on "Create Task"
     expect(page).to have_content "Task was created successfully!"
     expect(page).to have_content "A fun task"
-    expect(page).to have_content "11 months"
+    expect(page).to have_content "10 months"
   end
 
   scenario 'User cannot add a task without a description' do
