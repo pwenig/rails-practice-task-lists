@@ -3,7 +3,6 @@ class TasksController < ApplicationController
   def new
     @task = Task.new
     @task_list = TaskList.find(params[:task_list_id])
-
   end
 
   def create
@@ -11,7 +10,7 @@ class TasksController < ApplicationController
     @task = Task.new(task_attributes)
     @task.user_id = session[:user_id]
     if @task.save
-      flash.notice = "Task was created successfully!"
+      flash.notice = "Task was sucessfully created"
       redirect_to root_path
     else
       flash.notice = "Your task could not be created"
@@ -20,14 +19,14 @@ class TasksController < ApplicationController
   end
 
   def update
-    task = Task.find(params[:id])
-    task.update(completed:true)
+  task = Task.find(params[:id])
+  task.update(completed: true)
     redirect_to root_path
   end
 
   private
   def task_attributes
-    params.require(:task).permit(:name, :due_date).merge(task_list_id: params[:task_list_id])
+    params.require(:task).permit(:description, :due_date).merge(task_list_id: params[:task_list_id])
   end
 
 end
